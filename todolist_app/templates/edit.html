@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>Edit Task </h1>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        {% if task_obj.manage == request.user %}
+            <form method="POST" class="row">
+                {% csrf_token %}
+                <label class="col-lg-2">Your tasks for today?</label>
+                <input type="text" name="task" class="form-control col-lg-6" placeholder="{{ task_obj.task }}"
+                       value="{{ task_obj.task }}">
+                <input type="hidden" name="done" value="{{ task_obj.done }}">
+                <button type="submit" class="btn btn-primary col-lg-2">Update Task</button>
+            </form>
+        {% else %}
+            <p>You are not authorised to update this content</p>
+        {% endif %}
+    </div>
+{% endblock content %}
